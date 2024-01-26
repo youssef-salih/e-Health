@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Home{% endblock %}
+
+
+{% block content %}
+
+    <!-- ***** Welcome Area Start ***** -->
+    <section class="welcome-area">
+        <!-- Welcome Slides -->
+
+        <div class="welcome-slides owl-carousel">
+            <!-- Single Welcome Slide -->
+            {% for web in web %}
+                <div class="welcome-welcome-slide bg-img bg-gradient-overlay jarallax "
+                     style="background-image: url('{{ web.images.url }}');">
+                    <div class="container h-100">
+                        <div class="row h-100 align-items-center">
+                            <div class="col-12">
+                                <!-- Welcome Text -->
+                                <div class="welcome-text text-center">
+                                    <h2 data-animation="fadeInUp" data-delay="100ms">{{ web.slogang }}</h2>
+
+
+                                    <div class="welcome-btn-group">
+
+                                        <div class="row mb-5">
+
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </section>
+
+
+
+    <section class="cardio-area section-padding-35-0">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-12">
+                    <div class="section-heading text-center">
+                        </br>
+
+                        <h3 class="lead">Available Doctors </h3>
+                        <div class="line"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ">
+                {% if doc %}
+
+                    {% for apt in doc %}
+                        {% if apt.user.is_active %}
+                            <!-- Single cardio Area -->
+                            <div class="col-lg-4 col-sm-12 col-md-6 d-flex justify-content-center">
+                                <div class="single-cardio-area mb-100">
+                                    <img style="height: 500px; width: 600px" src="{{ apt.image.url }}" alt="">
+                                    <!-- cardio Content -->
+                                    <div class="cardio-content">
+                                        <!-- Social Info -->
+                                        <div class="cardio-social-info">
+
+                                        </div>
+                                        <!-- cardio Info -->
+                                        <div class="cardio-info bg-gradient-overlay">
+                                            {% if request.user.is_authenticated and request.user.role == 'patient' %}
+                                                <h5>{{ apt.full_name }}</h5>
+                                                <p>private contact : {{ apt.user }}</p>
+                                                <p>Available {{ apt.start_time }} to {{ apt.end_time }}</p>
+
+
+                                            {% elif request.user.is_authenticated and request.user.role == 'doctor' %}
+
+                                                <h5>{{ apt.full_name }}</h5>
+                                                <p>private contact : {{ apt.user }}</p>
+
+                                            {% else %}
+
+                                                <h5>{{ apt.full_name }}</h5>
+                                                <p>private contact : {{ apt.user }}</p>
+
+
+                                            {% endif %}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <h2 class="text-center">No doctors available</h2>
+                {% endif %}
+            </div>
+
+        </div>
+    </section>
+
+{% endblock %}

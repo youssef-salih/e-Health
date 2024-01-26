@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Patient List{% endblock %}
+
+{% block content %}
+    <section class="dentist-area section-padding-50-0">
+
+        <div class="container" style="align-items: center; justify-content: center;display: flex;">
+            <div class="col-12 col-sm-6 col-md-4">
+
+                <h3 style="align-items: center;justify-content: center;display: flex"> {{ request.user.first_name }}
+                    has {{ patients.count }}
+                    Patient/s</h3>
+
+                </br >
+                </br >
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="cardio-area section-padding-30-0">
+
+        <div class="container">
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col">Allergie</th>
+                    <th scope="col">Date/Time</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
+
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for patient in patients %}
+                    <tr>
+
+                        <td>{{ patient.full_name }}</td>
+                        <td> {{ patient.phone_number }}</td>
+                        <td> {{ patient.allergie }}</td>
+                        <td> {{ patient.date }}/ {{ patient.time }}</td>
+                        <td id="status" > {{ patient.status}}</td>
+                        <td>
+                            <a href="{% url 'appointment:delete-patient' patient.id %}">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                            &nbsp;|
+                            <a href="{% url 'appointment:detail-patient' patient.id %}">
+                                show
+                            </a>
+
+                        </td>
+                        <td></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+    </section>
+
+{% endblock %}

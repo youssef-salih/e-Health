@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Appointment List{% endblock %}
+
+
+
+{% block content %}
+
+    <section class="dentist-area section-padding-40-0">
+
+        <div class="container">
+
+
+            <div class="row">
+
+                <!-- Section Heading -->
+                <div class="col-12">
+                    <div class="section-heading text-center">
+
+
+                        <h3>{{ request.user.first_name }}'s Appointment/s</h3>
+                        <div class="line"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                {% for apt in appointment %}
+                    <!-- Single cardio Area -->
+                    <div class="col-12 col-sm-6 col-md-4">
+
+                        <div class="single-cardio-area mb-100">
+                            <img style="height: 500px; width: 600px" src="{{ apt.image.url }}" alt="">
+                            <!-- Dentist Content -->
+                            <div class="cardio-content">
+                                <!-- Social Info -->
+                                <div class="cardio-social-info">
+
+                                </div>
+                                <!-- Dentist Info -->
+                                <div class="cardio-info bg-gradient-overlay">
+                                    <h5 class="text-capitalize">{{ apt.full_name }}</h5>
+                                    <p>Available {{ apt.start_time }} to {{ apt.end_time }}
+                                    </p>
+                                    <p>
+                                        <i class="fa fa-trash-o" style="color: red" aria-hidden="true"></i>
+                                        <a href="{% url 'appointment:delete-doctor-appointment' apt.id %}">Delete
+                                            Appointment</a>
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

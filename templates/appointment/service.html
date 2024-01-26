@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Service{% endblock %}
+
+{% block content %}
+    <section class="dentist-area section-padding-50-0">
+        <center><h3 class="lead">Our Services</h3></center>
+
+        </br>
+        <div class="container">
+            {% if request.user.is_authenticated and request.user.role == 'admin' %}
+                <a href="{% url 'doctor_website:add_service' %}">
+                    <button type="button" class="btn btn-primary pull-right">add service</button>
+                </a>
+            {% endif %}
+            <div class="row">
+
+                {% for serv in serve %}
+                    <!-- Single Service Area -->
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <div class="single-service--area text-center mb-50">
+
+                            <div class="icon--">
+                                <img src="{{ serv.image_icon.url }}" alt="">
+                            </div>
+                            <h5>{{ serv.title }}</h5>
+                            <p>{{ serv.caption }}</p>
+                            {% if request.user.is_authenticated and request.user.role == 'admin' %}
+                                <a href="{% url 'doctor_website:delete-service' serv.id %}" class="">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

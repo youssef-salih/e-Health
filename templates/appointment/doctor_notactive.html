@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Service{% endblock %}
+
+{% block content %}
+    <section class="dentist-area section-padding-50-0">
+        <div class="container">
+            <h1>please contact admistration your account is disabled</h1>
+            <a href="{% url 'accounts:logout' %}">logout</a>
+        </div>
+    </section>
+{% endblock %}

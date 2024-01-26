@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% load bootstrap %}
+
+{% block title %} Appointment Create {% endblock %}
+
+{% block content %}
+
+    <section class="dentist-area mt-5 section-padding-40-0">
+
+        <div class="container">
+            {% if user %}
+
+                <div class="row">
+
+
+                    {% for x in user %}
+                        <!-- Single cardio Area -->
+                        <div class="col-12 col-sm-6 col-md-4">
+
+                            <div class="single-cardio-area mb-100">
+                                {{ x.email }}
+                                {% if x.is_active %}
+                                    <a class="float-right" href="{% url 'doctor_website:doctoractive' x.id %}">disactivate
+                                        account</a>
+                                {% else %}
+                                    <a class="float-right" href="{% url 'doctor_website:doctoractive' x.id %}">activate
+                                        account</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                 <h2 class="text-center">No doctors available</h2>
+            {% endif %}
+
+        </div>
+    </section>
+
+{% endblock %}

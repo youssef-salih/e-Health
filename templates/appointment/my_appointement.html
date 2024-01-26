@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Appointement List{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% if messages %}
+            <div class="card messages text-center">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <section class="dentist-area section-padding-50-0">
+
+            <div class="container" style="align-items: center; justify-content: center;display: flex;">
+                <div class="col-12 col-sm-6 col-md-4">
+
+                    <h3 style="align-items: center;justify-content: center;display: flex"> {{ request.user.first_name }} {{ request.user.last_name }}
+                        made {{ rdv.count }}
+                        Appointement/s</h3>
+
+                    </br >
+                    </br >
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="dentist-area section-padding-30-0">
+
+            <div class="container">
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Doctor Name</th>
+                        <th scope="col">Date de creation</th>
+                        <th scope="col">Date/Time</th>
+                        <th scope="col">Allergie</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Actions</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for rdv in rdv %}
+                        <tr>
+
+                            <td>{{ rdv.full_name }}</td>
+                            <td>{{ rdv.doctor }}</td>
+                            <td> {{ rdv.created_at }}</td>
+                            <td> {{ rdv.date }}/ {{ rdv.time }}</td>
+                            <td> {{ rdv.allergie }}</td>
+                            <td id="status"> {{ rdv.status }}</td>
+                            <td>
+                                <a href="{% url 'appointment:delete-appointment' rdv.id %}">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            </td>
+                            <td></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+            </div>
+        </section>
+    </div>
+{% endblock %}

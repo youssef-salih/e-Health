@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+
+{% block title %}Patient registration{% endblock %}
+
+
+{% block content %}
+
+    <div class="container">
+        {% if messages %}
+            <div class="card messages text-center">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="row ">
+            <div class="col-lg-3 mb-5 mb-lg-0">
+
+            </div>
+            <div class="col-lg-5 mb-5 mb-lg-0">
+                <center><h3>Patient Registration</h3></center>
+
+                <form action="" method="POST">{% csrf_token %}
+                    {{ form|bootstrap }}
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <br>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="male gender"
+                                   value="male" required>
+                            <label class="form-check-label" for="male">Male</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="female"
+                                   value="female" >
+                            <label class="form-check-label" for="female">Female</label>
+                        </div>
+                    </div>
+
+
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <input type="submit" value="Register" class="btn btn-primary btn-md text-white">
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+
+{% endblock %}
+
+
